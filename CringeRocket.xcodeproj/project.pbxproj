@@ -16,6 +16,7 @@
 		0E5994C127F460A700E1E5C4 /* CringeRocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5994C027F460A700E1E5C4 /* CringeRocketTests.swift */; };
 		0E5994CB27F460A700E1E5C4 /* CringeRocketUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5994CA27F460A700E1E5C4 /* CringeRocketUITests.swift */; };
 		0E5994CD27F460A700E1E5C4 /* CringeRocketUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5994CC27F460A700E1E5C4 /* CringeRocketUITestsLaunchTests.swift */; };
+		0E5994DA27F4663D00E1E5C4 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5994D927F4663D00E1E5C4 /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		0E5994C627F460A700E1E5C4 /* CringeRocketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CringeRocketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5994CA27F460A700E1E5C4 /* CringeRocketUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CringeRocketUITests.swift; sourceTree = "<group>"; };
 		0E5994CC27F460A700E1E5C4 /* CringeRocketUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CringeRocketUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0E5994D927F4663D00E1E5C4 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				0E5994A927F460A500E1E5C4 /* AppDelegate.swift */,
 				0E5994AB27F460A500E1E5C4 /* SceneDelegate.swift */,
 				0E5994AD27F460A500E1E5C4 /* ViewController.swift */,
+				0E5994D927F4663D00E1E5C4 /* GameViewController.swift */,
 				0E5994AF27F460A600E1E5C4 /* Main.storyboard */,
 				0E5994B227F460A700E1E5C4 /* Assets.xcassets */,
 				0E5994B427F460A700E1E5C4 /* LaunchScreen.storyboard */,
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E5994DA27F4663D00E1E5C4 /* GameViewController.swift in Sources */,
 				0E5994AE27F460A500E1E5C4 /* ViewController.swift in Sources */,
 				0E5994AA27F460A500E1E5C4 /* AppDelegate.swift in Sources */,
 				0E5994AC27F460A500E1E5C4 /* SceneDelegate.swift in Sources */,

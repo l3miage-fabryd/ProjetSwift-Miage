@@ -15,5 +15,10 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func playAction() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let gameViewController = storyboard.instantiateViewController(withIdentifier: "GameViewController")
+        self.navigationController?.pushViewController(gameViewController, animated: true)
+    }
 }
 
