@@ -20,5 +20,6 @@ class ViewController: UIViewController {
         let gameViewController = storyboard.instantiateViewController(withIdentifier: "GameViewController")
         self.navigationController?.pushViewController(gameViewController, animated: true)
     }
+    
 }
 
