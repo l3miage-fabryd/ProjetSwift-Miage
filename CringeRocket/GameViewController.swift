@@ -12,25 +12,43 @@ class GameViewController: UIViewController {
     @IBOutlet weak var rocket: UIImageView!
     @IBOutlet weak var rocketLeftMargin: NSLayoutConstraint!
     
+    var speed = 0.0
+    var position = 3
+    var columns = 5
+    
+    var obst1: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        speed = view.frame.size.width / Double(columns)
+        rocketLeftMargin.constant = (view.frame.size.width - rocket.frame.width) / 2
 
-        // Do any additional setup after loading the view.
+        obst1 = UIImageView(frame: CGRect(x: 20, y: 50, width: 50, height: 50))
+        obst1.image =  UIImage(systemName: "person.fill")
+        self.view.addSubview(obst1)
     }
     
     @IBAction func goRight() {
-        var viewSize = self.view.frame.size
-        if self.rocketLeftMargin.constant + 10 <= viewSize.width {
-            self.rocketLeftMargin.constant += 10
+        let viewSize = view.frame.size
+        
+        if position < columns {
+            rocketLeftMargin.constant += speed
+            position += 1
         }
-        print(viewSize)
-        print(self.rocketLeftMargin.constant)
+        
+        print(rocketLeftMargin.constant)
+        print(position)
     }
+    
     @IBAction func goLeft() {
-        if self.rocketLeftMargin.constant - 10 >= 0 {
-            self.rocketLeftMargin.constant -= 10
+        if position > 1 {
+            rocketLeftMargin.constant -= speed
+            position -= 1
         }
-        print(self.rocketLeftMargin.constant)
+        
+        print(rocketLeftMargin.constant)
+        print(position)
     }
 
     /*
