@@ -6,32 +6,47 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameViewController: UIViewController {
 
     @IBOutlet weak var rocket: UIImageView!
     @IBOutlet weak var rocketLeftMargin: NSLayoutConstraint!
     
+    // TODO : murs
+    // TODO : musique
+    
     var speed = 0.0
     var position = 3
     var columns = 5
     
-    var obst1: UIImageView!
+    var obstacles: Array<UIImageView> = Array()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AVAudioPlayer(contentsOf: <#T##URL#>)
+        
         speed = view.frame.size.width / Double(columns)
         rocketLeftMargin.constant = (view.frame.size.width - rocket.frame.width) / 2
-
-        obst1 = UIImageView(frame: CGRect(x: 20, y: 50, width: 50, height: 50))
-        obst1.image =  UIImage(systemName: "person.fill")
-        self.view.addSubview(obst1)
+        
+        for i in 0...columns - 1 {
+            let obstacle = UIImageView(frame: CGRect(x: i * Int(speed), y: 50, width: 50, height: 50))
+            print(obstacle)
+            obstacle.image =  UIImage(named: "the_colossal")
+            view.addSubview(obstacle)
+            obstacles.append(obstacle)
+        }
+        
+        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
     
-    @IBAction func goRight() {
-        let viewSize = view.frame.size
-        
+    @objc func fireTimer() {
+        print("Timer fired!")
+        let randomInt = Int.random(in: 10...50)
+    }
+    
+    func goRight() {
         if position < columns {
             rocketLeftMargin.constant += speed
             position += 1
@@ -41,7 +56,7 @@ class GameViewController: UIViewController {
         print(position)
     }
     
-    @IBAction func goLeft() {
+    func goLeft() {
         if position > 1 {
             rocketLeftMargin.constant -= speed
             position -= 1
@@ -49,6 +64,16 @@ class GameViewController: UIViewController {
         
         print(rocketLeftMargin.constant)
         print(position)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let pos: CGPoint = (touches.first?.location(in: view))!
+        
+        if pos.x < view.frame.size.width / 2 {
+            goLeft()
+        } else {
+            goRight()
+        }
     }
 
     /*

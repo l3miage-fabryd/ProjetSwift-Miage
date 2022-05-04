@@ -76,26 +76,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yln-7H-Ldn">
-                                <rect key="frame" x="332" y="771" width="62" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Right "/>
-                                <connections>
-                                    <action selector="goRight" destination="ujT-jB-rc4" eventType="touchUpInside" id="1yb-dA-4ZC"/>
-                                    <action selector="playAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="g5C-hq-9Cm"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btR-I4-Um1">
-                                <rect key="frame" x="20" y="771" width="50" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Left"/>
-                                <connections>
-                                    <action selector="goLeft" destination="ujT-jB-rc4" eventType="touchUpInside" id="bf6-IG-4hv"/>
-                                    <action selector="playAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="p2F-sW-ZVP"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="arrowtriangle.up.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MTz-4L-Bdl">
-                                <rect key="frame" x="182" y="714" width="50" height="46"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="zoro" translatesAutoresizingMaskIntoConstraints="NO" id="MTz-4L-Bdl">
+                                <rect key="frame" x="182" y="712" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="aJd-g7-kvh"/>
                                     <constraint firstAttribute="height" constant="50" id="wft-DH-zuL"/>
@@ -105,12 +87,8 @@
                         <viewLayoutGuide key="safeArea" id="aN4-Gq-GIk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="aN4-Gq-GIk" firstAttribute="bottom" secondItem="btR-I4-Um1" secondAttribute="bottom" constant="60" id="0jL-lf-FLZ"/>
-                            <constraint firstItem="aN4-Gq-GIk" firstAttribute="bottom" secondItem="Yln-7H-Ldn" secondAttribute="bottom" constant="60" id="67l-h1-Bzv"/>
                             <constraint firstItem="MTz-4L-Bdl" firstAttribute="leading" secondItem="aN4-Gq-GIk" secondAttribute="leading" constant="182" id="E8p-ZH-lBn"/>
-                            <constraint firstItem="aN4-Gq-GIk" firstAttribute="trailing" secondItem="Yln-7H-Ldn" secondAttribute="trailing" constant="20" id="xpF-Lj-3nS"/>
                             <constraint firstItem="aN4-Gq-GIk" firstAttribute="bottom" secondItem="MTz-4L-Bdl" secondAttribute="bottom" constant="100" id="yu1-Dc-MYk"/>
-                            <constraint firstItem="btR-I4-Um1" firstAttribute="leading" secondItem="aN4-Gq-GIk" secondAttribute="leading" constant="20" id="zaX-y6-rK2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -124,7 +102,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowtriangle.up.fill" catalog="system" width="128" height="124"/>
+        <image name="zoro" width="840" height="1016"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
