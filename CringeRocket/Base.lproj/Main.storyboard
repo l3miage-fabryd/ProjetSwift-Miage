@@ -83,25 +83,36 @@
                                     <constraint firstAttribute="height" constant="50" id="wft-DH-zuL"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thousand-sunny-1" translatesAutoresizingMaskIntoConstraints="NO" id="Hgd-UK-hTz">
+                                <rect key="frame" x="56" y="796" width="301" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="Woq-r2-192"/>
+                                    <constraint firstAttribute="height" constant="100" id="vg9-hh-BoP"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aN4-Gq-GIk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="MTz-4L-Bdl" firstAttribute="leading" secondItem="aN4-Gq-GIk" secondAttribute="leading" constant="182" id="E8p-ZH-lBn"/>
+                            <constraint firstItem="Hgd-UK-hTz" firstAttribute="centerX" secondItem="vbR-f0-IgD" secondAttribute="centerX" id="GHm-Vi-D0d"/>
+                            <constraint firstAttribute="bottom" secondItem="Hgd-UK-hTz" secondAttribute="bottom" id="yBM-fH-Y0f"/>
                             <constraint firstItem="aN4-Gq-GIk" firstAttribute="bottom" secondItem="MTz-4L-Bdl" secondAttribute="bottom" constant="100" id="yu1-Dc-MYk"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="rocket" destination="MTz-4L-Bdl" id="syN-mi-4TN"/>
                         <outlet property="rocketLeftMargin" destination="E8p-ZH-lBn" id="G0u-Y9-VfV"/>
+                        <outlet property="ship" destination="Hgd-UK-hTz" id="XYu-lo-gVt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t8q-Xq-PU2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851" y="116"/>
+            <point key="canvasLocation" x="850.72463768115949" y="115.84821428571428"/>
         </scene>
     </scenes>
     <resources>
+        <image name="thousand-sunny-1" width="700" height="312"/>
         <image name="zoro" width="840" height="1016"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

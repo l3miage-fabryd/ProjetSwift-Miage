@@ -13,29 +13,36 @@ class GameViewController: UIViewController {
     @IBOutlet weak var rocket: UIImageView!
     @IBOutlet weak var rocketLeftMargin: NSLayoutConstraint!
     
-    // TODO : murs
-    // TODO : musique
+    @IBOutlet weak var ship: UIImageView!
     
-    var speed = 0.0
-    var position = 3
-    var columns = 5
+    // TODO : murs
+    
+    var horizontalSpeed = 0.0
+    var verticalSpeed = 0.0
+    var playerPosition = 3
+    var horizontalColumns = 5
+    var verticalColumns = 5
+    var stateShip = 1
     
     var obstacles: Array<UIImageView> = Array()
+    var obstaclesPosition: Array<Int> = Array()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AVAudioPlayer(contentsOf: <#T##URL#>)
+        // TODO: AVAudioPlayer(contentsOf: <#T##URL#>)
         
-        speed = view.frame.size.width / Double(columns)
+        horizontalSpeed = view.frame.size.width / Double(horizontalColumns)
+        verticalSpeed = view.frame.size.height / Double(verticalColumns)
         rocketLeftMargin.constant = (view.frame.size.width - rocket.frame.width) / 2
         
-        for i in 0...columns - 1 {
-            let obstacle = UIImageView(frame: CGRect(x: i * Int(speed), y: 50, width: 50, height: 50))
+        for i in 0...horizontalColumns - 1 {
+            let obstacle = UIImageView(frame: CGRect(x: i * Int(horizontalSpeed), y: 50, width: 50, height: 50))
             print(obstacle)
             obstacle.image =  UIImage(named: "the_colossal")
             view.addSubview(obstacle)
             obstacles.append(obstacle)
+            obstaclesPosition.append(0)
         }
         
         let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
@@ -43,27 +50,58 @@ class GameViewController: UIViewController {
     
     @objc func fireTimer() {
         print("Timer fired!")
-        let randomInt = Int.random(in: 10...50)
+        let randomInt = Int.random(in: 0...obstacles.count - 1)
+        obstacles[randomInt].frame.origin.y += verticalSpeed
+        obstaclesPosition[randomInt] += 1
+        
+        if obstaclesPosition[randomInt] > verticalColumns {
+            obstacles[randomInt].removeFromSuperview()
+            obstacles.remove(at: randomInt)
+        }
+        
+        if obstaclesPosition[randomInt] == 4 && randomInt == playerPosition {
+            obstacles[randomInt].removeFromSuperview()
+            obstacles.remove(at: randomInt)
+            
+        }
+        
+        if obstaclesPosition[randomInt] == 5  {
+            obstacles[randomInt].removeFromSuperview()
+            obstacles.remove(at: randomInt)
+            stateShip += 1
+            ship.image = UIImage(named: "thousand-sunny-" + String(stateShip))
+            if stateShip == 0 {
+                gameOver()
+            }
+        }
+        
+        if obstacles.count == 0 {
+            gameOver()
+        }
     }
     
     func goRight() {
-        if position < columns {
-            rocketLeftMargin.constant += speed
-            position += 1
+        if playerPosition < horizontalColumns {
+            rocketLeftMargin.constant += horizontalSpeed
+            playerPosition += 1
         }
         
         print(rocketLeftMargin.constant)
-        print(position)
+        print(playerPosition)
     }
     
     func goLeft() {
-        if position > 1 {
-            rocketLeftMargin.constant -= speed
-            position -= 1
+        if playerPosition > 1 {
+            rocketLeftMargin.constant -= horizontalSpeed
+            playerPosition -= 1
         }
         
         print(rocketLeftMargin.constant)
-        print(position)
+        print(playerPosition)
+    }
+    
+    func gameOver() {
+        print("partie terminée")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
