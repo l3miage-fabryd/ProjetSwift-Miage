@@ -10,8 +10,8 @@ import AVFoundation
 
 class GameViewController: UIViewController {
 
-    @IBOutlet weak var rocket: UIImageView!
     @IBOutlet weak var rocketLeftMargin: NSLayoutConstraint!
+    @IBOutlet weak var rocket: UIImageView!
     @IBOutlet weak var ship: UIImageView!
         
     var horizontalSpeed = 0.0
@@ -28,7 +28,8 @@ class GameViewController: UIViewController {
     
     var timer: Timer!
     
-    var audioPlayer: AVAudioPlayer!
+    var musicPlayer: AVAudioPlayer!
+    var soundPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,26 +48,39 @@ class GameViewController: UIViewController {
             obstaclesPosition.append(0)
         }
         
-        playAudioAsset("music")
+        musicPlayer = createAudioPlayerFromAsset("music")
+        soundPlayer = createAudioPlayerFromAsset("sword")
+        
+        musicPlayer.play()
         
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
     
     @objc func fireTimer() {
+        print(aliveObstacles)
+        print(aliveObstacles.count)
+        
+        if aliveObstacles.count == 0 {
+            print("before")
+            gameOver(true)
+            print("after")
+            return
+        }
+        
         let random = aliveObstacles.randomElement()!
         obstacles[random].frame.origin.y += verticalSpeed
         obstaclesPosition[random] += 1
         
         if obstaclesPosition[random] > verticalColumns {
-            removeObstacle()
+            removeObstacle(random)
         }
         
         if obstaclesPosition[random] == playerVerticalPosition && random == playerPosition {
-            removeObstacle()
+            removeObstacle(random)
         }
         
         if obstaclesPosition[random] == 9 {
-            removeObstacle()
+            removeObstacle(random)
             stateShip += 1
             ship.image = UIImage(named: "thousand-sunny-" + String(stateShip))
             if stateShip >= 4 {
@@ -74,21 +88,7 @@ class GameViewController: UIViewController {
             }
         }
         
-        print(aliveObstacles.count)
-        
-        if aliveObstacles.count == 0 {
-            gameOver(true)
-        }
-        
         print(obstaclesPosition)
-                
-        func removeObstacle() {
-            playAudioAsset("sword")
-            
-            obstacles[random].removeFromSuperview()
-            aliveObstacles = aliveObstacles.filter {$0 != random}
-        }
-        
     }
     
     func goRight() {
@@ -113,13 +113,18 @@ class GameViewController: UIViewController {
         print(playerPosition)
     }
     
+    func removeObstacle(_ index: Int) {
+        soundPlayer.play()
+        soundPlayer.volume = 0.1
+        
+        obstacles[index].removeFromSuperview()
+        aliveObstacles = aliveObstacles.filter {$0 != index}
+        obstaclesPosition[index] = -1
+    }
+    
     func checkObstacle() {
         if obstaclesPosition[playerPosition] == playerVerticalPosition {
-            playAudioAsset("sword")
-
-            obstacles[playerPosition].removeFromSuperview()
-            aliveObstacles = aliveObstacles.filter {$0 != playerPosition}
-            obstaclesPosition[playerPosition] = -1
+            removeObstacle(playerPosition)
         }
     }
     
@@ -135,8 +140,6 @@ class GameViewController: UIViewController {
         }))
         
         self.present(alert, animated: true, completion: nil)
-        
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -149,14 +152,13 @@ class GameViewController: UIViewController {
         }
     }
     
-    func playAudioAsset(_ assetName : String) {
+    func createAudioPlayerFromAsset(_ assetName : String) -> AVAudioPlayer {
           guard let audioData = NSDataAsset(name: assetName)?.data else {
              fatalError("Unable to find asset \(assetName)")
           }
 
           do {
-             audioPlayer = try AVAudioPlayer(data: audioData)
-             audioPlayer.play()
+             return try AVAudioPlayer(data: audioData)
           } catch {
              fatalError(error.localizedDescription)
         }
