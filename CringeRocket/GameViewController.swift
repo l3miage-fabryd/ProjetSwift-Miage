@@ -10,18 +10,29 @@ import AVFoundation
 
 class GameViewController: UIViewController {
 
-    @IBOutlet weak var rocketLeftMargin: NSLayoutConstraint!
-    @IBOutlet weak var rocket: UIImageView!
+    // Marge pour contrôler la position du joueur
+    @IBOutlet weak var playerLeftMargin: NSLayoutConstraint!
+    
+    // Textures
+    @IBOutlet weak var player: UIImageView!
     @IBOutlet weak var ship: UIImageView!
-        
-    var horizontalSpeed = 0.0
-    var verticalSpeed = 0.0
+
+    // Vitesse de déplacement en pixels
+    var horizontalSpeed: Double!
+    var verticalSpeed: Double!
+    
+    // Position du joueur dans la grille
     var playerPosition = 2
     var playerVerticalPosition = 6
+    
+    // Dimension de la grille
     var horizontalColumns = 5
     var verticalColumns = 10
+    
+    // État du bateau
     var stateShip = 1
     
+    // Informations sur les ennemis (titans)
     var obstacles: Array<UIImageView> = Array()
     var aliveObstacles: Array<Int> = Array()
     var obstaclesPosition: Array<Int> = Array()
@@ -33,11 +44,14 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        // Calculs en fonction de la taille de l'écran
         horizontalSpeed = view.frame.size.width / Double(horizontalColumns)
         verticalSpeed = view.frame.size.height / Double(verticalColumns)
-        rocketLeftMargin.constant = (view.frame.size.width - rocket.frame.width) / 2
+        // Centrer le joueur
+        playerLeftMargin.constant = (view.frame.size.width - player.frame.width) / 2
         
+        // Génération des ennemis
         for i in 0...horizontalColumns - 1 {
             let obstacle = UIImageView(frame: CGRect(x: i * Int(horizontalSpeed), y: 50, width: 50, height: 50))
             print(obstacle)
@@ -53,33 +67,27 @@ class GameViewController: UIViewController {
         
         musicPlayer.play()
         
+        // Lancement du timer qui déplace les ennemis de manière aléatoire
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
     
     @objc func fireTimer() {
-        print(aliveObstacles)
-        print(aliveObstacles.count)
-        
         if aliveObstacles.count == 0 {
-            print("before")
             gameOver(true)
-            print("after")
             return
         }
         
         let random = aliveObstacles.randomElement()!
         obstacles[random].frame.origin.y += verticalSpeed
         obstaclesPosition[random] += 1
-        
-        if obstaclesPosition[random] > verticalColumns {
-            removeObstacle(random)
-        }
-        
+
+        // Si l'ennemi rentre en contact avec le joueur
         if obstaclesPosition[random] == playerVerticalPosition && random == playerPosition {
             removeObstacle(random)
         }
         
-        if obstaclesPosition[random] == 9 {
+        // Si l'ennemi arrive au niveau du bateau
+        if obstaclesPosition[random] > verticalColumns - 1 {
             removeObstacle(random)
             stateShip += 1
             ship.image = UIImage(named: "thousand-sunny-" + String(stateShip))
@@ -87,30 +95,24 @@ class GameViewController: UIViewController {
                 gameOver(false)
             }
         }
-        
-        print(obstaclesPosition)
-    }
+}
     
     func goRight() {
         if playerPosition < horizontalColumns - 1 {
-            rocketLeftMargin.constant += horizontalSpeed
+            playerLeftMargin.constant += horizontalSpeed
             playerPosition += 1
         }
         
         checkObstacle()
-        
-        print(playerPosition)
     }
     
     func goLeft() {
         if playerPosition > 0 {
-            rocketLeftMargin.constant -= horizontalSpeed
+            playerLeftMargin.constant -= horizontalSpeed
             playerPosition -= 1
         }
         
         checkObstacle()
-                
-        print(playerPosition)
     }
     
     func removeObstacle(_ index: Int) {

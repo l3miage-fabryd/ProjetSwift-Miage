@@ -101,8 +101,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="rocket" destination="MTz-4L-Bdl" id="syN-mi-4TN"/>
-                        <outlet property="rocketLeftMargin" destination="E8p-ZH-lBn" id="G0u-Y9-VfV"/>
+                        <outlet property="player" destination="MTz-4L-Bdl" id="syN-mi-4TN"/>
+                        <outlet property="playerLeftMargin" destination="E8p-ZH-lBn" id="G0u-Y9-VfV"/>
                         <outlet property="ship" destination="Hgd-UK-hTz" id="XYu-lo-gVt"/>
                     </connections>
                 </viewController>
